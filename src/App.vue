@@ -1,12 +1,15 @@
 <template>
-  <nav>
-    <RouterLink to="/" class="button">Home</RouterLink>
-    <RouterLink to="/stats" class="button">Stats</RouterLink>
-  </nav>
+  <NavBar />
 
-  <RouterView />
+  <div class="container is-max-desktop px-2 py-4">
+    <RouterView />
+  </div>
 </template>
 
-<style scoped>
+<script lang="ts" setup>
+import NavBar from "@/components/layouts/NavBar.vue";
+</script>
+
+<style>
 @import "bulma/css/bulma.min.css";
 </style>
