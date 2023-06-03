@@ -16,6 +16,9 @@
 <script lang="ts" setup>
 import { ref, PropType, computed } from "vue";
 import { Note } from "@/types/Note";
+import { useNoteStore } from "@/stores/notes";
+
+const noteStore = useNoteStore();
 
 const props = defineProps({
   note: {
@@ -24,13 +27,11 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits(["deleteNote"]);
-
 const note = ref(props.note);
 
 const contentsLength = computed(() => note.value.content.length);
 
 const onDeleteNote = () => {
-  emit("deleteNote", note.value.id);
+  noteStore.deleteNote(note.value.id);
 };
 </script>

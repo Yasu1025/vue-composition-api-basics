@@ -27,20 +27,14 @@
 
 <script lang="ts" setup>
 import { ref } from "vue";
-import { Note } from "@/types/Note";
+import { useNoteStore } from "@/stores/notes";
 
-const emits = defineEmits<{ addNote: [value: Note] }>();
+const noteStore = useNoteStore();
 
 const newNote = ref("");
 
 const onAddNote = () => {
-  const currentDate = new Date().getTime(),
-    note = {
-      id: currentDate.toString(),
-      content: newNote.value,
-    };
-
-  emits("addNote", note);
+  noteStore.addNote(newNote.value);
   newNote.value = "";
 };
 </script>

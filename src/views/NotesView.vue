@@ -1,32 +1,19 @@
 <template>
   <div class="notes">
-    <NoteForm @addNote="addNote" />
-    <div v-if="notes.length">
-      <NoteSingle
-        v-for="note in notes"
-        :key="note.id"
-        :note="note"
-        @deleteNote="deleteNote"
-      />
+    <NoteForm />
+    <div v-if="noteStore.notes.length">
+      <NoteSingle v-for="note in noteStore.notes" :key="note.id" :note="note" />
     </div>
     <div v-else>No Post.....</div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { ref } from "vue";
-import { Note } from "@/types/Note";
 import NoteSingle from "@/components/parts/NoteSingle.vue";
 import NoteForm from "@/components/parts/NoteForm.vue";
+import { useNoteStore } from "@/stores/notes";
 
-const notes = ref<Note[]>([]);
-
-const addNote = (newNote: Note) => {
-  notes.value = [newNote, ...notes.value];
-};
-const deleteNote = (noteId: string) => {
-  notes.value = notes.value.filter((note) => note.id !== noteId);
-};
+const noteStore = useNoteStore();
 </script>
 
 <style lang="scss" scoped></style>
