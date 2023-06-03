@@ -2,7 +2,12 @@
   <div class="notes">
     <NoteForm @addNote="addNote" />
     <div v-if="notes.length">
-      <NoteSingle v-for="note in notes" :key="note.id" :note="note" />
+      <NoteSingle
+        v-for="note in notes"
+        :key="note.id"
+        :note="note"
+        @deleteNote="deleteNote"
+      />
     </div>
     <div v-else>No Post.....</div>
   </div>
@@ -18,6 +23,9 @@ const notes = ref<Note[]>([]);
 
 const addNote = (newNote: Note) => {
   notes.value = [newNote, ...notes.value];
+};
+const deleteNote = (noteId: string) => {
+  notes.value = notes.value.filter((note) => note.id !== noteId);
 };
 </script>
 
