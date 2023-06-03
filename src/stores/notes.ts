@@ -7,6 +7,8 @@ interface StateTypes {
 
 interface GettersType extends _GettersTree<StateTypes> {
   getNoteById: (state: StateTypes) => (id: string) => Note;
+  totalNoteCount: (state: StateTypes) => number;
+  totalCharaCount: (state: StateTypes) => number;
 }
 
 interface ActionsType {
@@ -26,6 +28,15 @@ export const useNoteStore = defineStore<
   getters: {
     getNoteById(state) {
       return (id: string) => state.notes.find((note) => note.id === id)!;
+    },
+    totalNoteCount: (state) => state.notes.length,
+    totalCharaCount: (state) => {
+      let count = 0;
+      state.notes.forEach((note) => {
+        count += note.content.length;
+      });
+
+      return count;
     },
   },
   actions: {
