@@ -7,7 +7,12 @@
       </div>
     </div>
     <footer class="card-footer">
-      <a href="#" class="card-footer-item">Edit</a>
+      <RouterLink
+        :to="`/edit-note/${note.id}`"
+        href="#"
+        class="card-footer-item"
+        >Edit</RouterLink
+      >
       <a href="#" class="card-footer-item" @click="onDeleteNote">Delete</a>
     </footer>
   </div>

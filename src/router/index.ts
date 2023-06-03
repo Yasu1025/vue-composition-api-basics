@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import NotesView from "@/views/NotesView.vue";
+import NoteEditView from "@/views/NoteEditView.vue";
 import StatsVuew from "@/views/StatsVuew.vue";
 
 const routes = [
@@ -7,6 +8,11 @@ const routes = [
     path: "/",
     name: "Notes",
     component: NotesView,
+  },
+  {
+    path: "/edit-note/:id",
+    name: "Edit-note",
+    component: NoteEditView,
   },
   {
     path: "/stats",

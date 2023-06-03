@@ -6,12 +6,13 @@ interface StateTypes {
 }
 
 interface GettersType extends _GettersTree<StateTypes> {
-  noteLength: (state: StateTypes) => number;
+  getNoteById: (state: StateTypes) => (id: string) => Note;
 }
 
 interface ActionsType {
   addNote: (newContent: string) => void;
   deleteNote: (noteId: string) => void;
+  updateNote: (updateNote: Note) => void;
 }
 
 export const useNoteStore = defineStore<
@@ -23,8 +24,8 @@ export const useNoteStore = defineStore<
   id: "storeNotes",
   state: () => ({ notes: [] }),
   getters: {
-    noteLength(state) {
-      return state.notes.length;
+    getNoteById(state) {
+      return (id: string) => state.notes.find((note) => note.id === id)!;
     },
   },
   actions: {
@@ -39,6 +40,10 @@ export const useNoteStore = defineStore<
     },
     deleteNote(noteId: string) {
       this.notes = this.notes.filter((note) => note.id !== noteId);
+    },
+    updateNote(updateNote: Note) {
+      const index = this.notes.findIndex((note) => note.id === updateNote.id);
+      this.notes[index].content = updateNote.content;
     },
   },
 });

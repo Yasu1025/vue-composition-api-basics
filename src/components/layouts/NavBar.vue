@@ -5,7 +5,6 @@
         <RouterLink to="/" class="navbar-item is-size-4 is-familly-monospace">
           Notable
         </RouterLink>
-        <a class="navbar-item" href="https://bulma.io"> </a>
 
         <a
           role="button"

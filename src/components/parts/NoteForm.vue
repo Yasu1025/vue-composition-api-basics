@@ -1,40 +1,40 @@
 <template>
   <div class="mb-4">
     <div class="field mb-2">
-      <label class="label">Message</label>
+      <label class="label">{{ props.label }}</label>
       <div class="control">
         <textarea
-          v-model="newNote"
+          :value="props.modelValue"
+          @input="$emit('update:modelValue', $event.target.value)"
           class="textarea"
-          placeholder="Textarea"
+          :placeholder="props.placeHolder"
         ></textarea>
       </div>
     </div>
 
     <div class="field is-grouped is-grouped-right">
       <div class="control">
-        <button
-          class="button is-link has-background-success"
-          :disabled="!newNote"
-          @click="onAddNote"
-        >
-          Add New Note
-        </button>
+        <slot name="buttons"></slot>
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { ref } from "vue";
-import { useNoteStore } from "@/stores/notes";
+const props = defineProps({
+  modelValue: {
+    type: String,
+    required: true,
+  },
+  placeHolder: {
+    type: String,
+    default: "Add new Note",
+  },
+  label: {
+    type: String,
+    default: "Create",
+  },
+});
 
-const noteStore = useNoteStore();
-
-const newNote = ref("");
-
-const onAddNote = () => {
-  noteStore.addNote(newNote.value);
-  newNote.value = "";
-};
+const emit = defineEmits(["update:modelValue"]);
 </script>
