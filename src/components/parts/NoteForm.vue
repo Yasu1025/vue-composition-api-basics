@@ -8,6 +8,7 @@
           @input="$emit('update:modelValue', $event.target.value)"
           class="textarea"
           :placeholder="props.placeHolder"
+          v-autofocus
         ></textarea>
       </div>
     </div>
@@ -21,6 +22,8 @@
 </template>
 
 <script lang="ts" setup>
+import { vAutofocus } from "@/directives/vAutofocus";
+
 const props = defineProps({
   modelValue: {
     type: String,
@@ -35,6 +38,4 @@ const props = defineProps({
     default: "Create",
   },
 });
-
-const emit = defineEmits(["update:modelValue"]);
 </script>
